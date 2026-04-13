@@ -46,7 +46,7 @@ export const COURSES = [
 export const HERO = {
   badge: "Newton, Massachusetts",
   heading: "Safe, confident,",
-  headingAccent: "welcomed here.",
+  headingAccent: " all welcomed here.",
   subheading:
     "State-certified firearms safety instruction for everyone — first-timers, new owners, returning shooters, and anyone curious. No prior experience needed. No judgment.",
   ctaPrimary: "Browse courses",
