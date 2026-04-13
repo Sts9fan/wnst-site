@@ -1,0 +1,78 @@
+.page {
+  min-height: 60vh;
+}
+
+.pageHeader {
+  background: var(--white);
+  border-bottom: 1px solid var(--tan);
+  padding: 3.5rem 1.5rem 2.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--sage);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.pageHeader h1 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+
+.pageHeader p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.courseGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.infoBox {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.infoBox h3 {
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.infoBox ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.infoBox ul li {
+  font-size: 14px;
+  color: var(--muted);
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.infoBox ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--sage);
+  font-size: 13px;
+}

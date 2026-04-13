@@ -1,0 +1,264 @@
+.grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+}
+
+.courseOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.courseOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.courseOption:hover {
+  border-color: var(--sage-mid);
+  background: var(--sage-pale);
+}
+
+.courseSelected {
+  border-color: var(--sage);
+  background: var(--sage-pale);
+}
+
+.courseOptionName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.courseOptionPrice {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+.calNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.calMonth {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.calBtn {
+  background: none;
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 16px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.calBtn:hover { border-color: var(--sage); color: var(--sage); }
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calHeader {
+  text-align: center;
+  font-size: 11px;
+  color: var(--subtle);
+  padding: 4px 0;
+  font-weight: 500;
+}
+
+.calDay {
+  text-align: center;
+  font-size: 13px;
+  padding: 7px 4px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.calAvail {
+  color: var(--navy);
+  font-weight: 500;
+}
+.calAvail:hover { background: var(--sage-light); color: var(--sage); }
+
+.calDisabled {
+  color: var(--tan-mid);
+  cursor: default;
+}
+
+.calSel {
+  background: var(--sage) !important;
+  color: var(--white) !important;
+}
+
+.timeLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  margin: 1.25rem 0 0.75rem;
+}
+
+.timeSlots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.timeSlot {
+  padding: 7px 14px;
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--navy);
+  background: var(--white);
+  transition: border-color 0.15s;
+}
+.timeSlot:hover { border-color: var(--sage); color: var(--sage); }
+
+.timeSel {
+  background: var(--sage);
+  color: var(--white) !important;
+  border-color: var(--sage) !important;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--subtle);
+}
+
+.input {
+  padding: 9px 12px;
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--cream);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--sage);
+}
+
+.summary {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 4px 0;
+}
+
+.summaryRow span:last-child {
+  color: var(--navy);
+  font-weight: 500;
+  text-align: right;
+  max-width: 55%;
+}
+
+.summaryTotal {
+  border-top: 1px solid var(--tan-mid);
+  margin-top: 6px;
+  padding-top: 8px;
+  font-weight: 500;
+  color: var(--navy) !important;
+}
+.summaryTotal span { color: var(--navy) !important; font-size: 15px; }
+
+.submitBtn {
+  width: 100%;
+  background: var(--navy);
+  color: var(--white);
+  padding: 13px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.submitBtn:hover { background: var(--navy-mid); }
+
+.stripeBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--subtle);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--tan-mid);
+}

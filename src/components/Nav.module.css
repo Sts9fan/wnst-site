@@ -1,0 +1,120 @@
+.header {
+  background: var(--white);
+  border-bottom: 1px solid var(--tan);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.logoName {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.logoSub {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.link {
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.link:hover,
+.linkActive {
+  color: var(--navy);
+}
+
+.cta {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.cta:hover {
+  background: var(--navy-mid);
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burgerLine,
+.burgerLine::before,
+.burgerLine::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.2s;
+}
+
+.drawer {
+  background: var(--white);
+  border-top: 1px solid var(--tan);
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.drawerLink {
+  font-size: 16px;
+  color: var(--navy);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--tan);
+}
+
+.drawerCta {
+  margin-top: 0.75rem;
+  background: var(--navy);
+  color: var(--white);
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .desktopLinks { display: none; }
+  .burger { display: flex; }
+}
