@@ -3,7 +3,7 @@ import { INTAKE_QUESTIONS, CONTACT } from '../config.js'
 import styles from './IntakePage.module.css'
 import pageStyles from './Page.module.css'
 
-const FORM_ENDPOINT = ''
+const FORM_ENDPOINT = 'https://formspree.io/f/mpqkzpdo'
 
 export default function IntakePage() {
   const [answers, setAnswers] = useState({})

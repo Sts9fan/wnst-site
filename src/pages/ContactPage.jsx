@@ -3,7 +3,7 @@ import { CONTACT } from '../config.js'
 import styles from './ContactPage.module.css'
 import pageStyles from './Page.module.css'
 
-const FORM_ENDPOINT = ''
+const FORM_ENDPOINT = 'https://formspree.io/f/xnjlqppe'
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
