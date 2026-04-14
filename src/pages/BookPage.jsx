@@ -7,44 +7,58 @@ export default function BookPage() {
   const [selectedCourse, setSelectedCourse] = useState(COURSES[0])
 
   useEffect(() => {
+    // Remove any existing Cal embed script
+    const existing = document.getElementById('cal-script')
+    if (existing) existing.remove()
+
+    // Reset Cal
+    window.Cal = undefined
+
     const script = document.createElement('script')
-    script.src = 'https://asset.cal.com/embed/embed.js'
-    script.async = true
+    script.id = 'cal-script'
+    script.innerHTML = `
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if(typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["-", ar]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", { origin: "https://cal.com" });
+      Cal("inline", {
+        elementOrSelector: "#cal-embed",
+        calLink: "${selectedCourse.calLink}",
+        layout: "month_view"
+      });
+      Cal("ui", {
+        styles: { branding: { brandColor: "#4a6e50" } },
+        hideEventTypeDetails: false,
+      });
+    `
     document.body.appendChild(script)
-    return () => document.body.removeChild(script)
-  }, [])
 
-  return (
-    <div className={pageStyles.page}>
-      <div className={pageStyles.pageHeader}>
-        <div className={pageStyles.label}>Booking</div>
-        <h1>Reserve your spot</h1>
-        <p>Select a course below and pick a date and time that works for you.
-           Payment is collected securely via Stripe at checkout.</p>
-      </div>
-
-      <div className={styles.wrap}>
-        {/* Course selector */}
-        <div className={styles.courseOptions}>
-          {COURSES.map(c => (
-            <button
-              key={c.id}
-              onClick={() => setSelectedCourse(c)}
-              className={`${styles.courseOption} ${selectedCourse.id === c.id ? styles.courseSelected : ''}`}
-            >
-              <div className={styles.courseOptionName}>{c.title}</div>
-              <div className={styles.courseOptionPrice}>{c.priceLabel}</div>
-            </button>
-          ))}
-        </div>
-
-        {/* Cal.com inline embed */}
-        <div
-          className={styles.calWrap}
-          data-cal-link={selectedCourse.calLink}
-          data-cal-config='{"layout":"month_view"}'
-        />
-      </div>
-    </div>
-  )
-}
+    return () => {
+      const s = document.getElementById('cal-script')
+      if (s) s.remove()
+    }
