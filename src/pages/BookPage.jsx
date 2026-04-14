@@ -37,7 +37,7 @@ export default function BookPage() {
             style={{ display: selectedId === c.id ? 'block' : 'none' }}
           >
             <iframe
-              src={`https://cal.com/${c.calLink}?embed=true`}
+              src={`https://cal.com/${c.calLink}?embed=true&cache=${c.id}`}
               style={{ width: '100%', height: '700px', border: 'none' }}
               title={c.title}
             />
