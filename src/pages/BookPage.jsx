@@ -7,39 +7,30 @@ export default function BookPage() {
   const [selectedId, setSelectedId] = useState(COURSES[0].id)
 
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://app.cal.com/embed/embed.js'
-    script.async = true
-    script.onload = () => {
-      setTimeout(() => {
-        const Cal = window.Cal
-        if (!Cal) return
+  const interval = setInterval(() => {
+    if (!window.Cal) return
+    clearInterval(interval)
+    const Cal = window.Cal
 
-      Cal("init", "ltc-class", { origin: "https://app.cal.com" })
-      Cal.ns["ltc-class"]("inline", {
-        elementOrSelector: "#my-cal-inline-ltc-class",
-        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
-        calLink: "kris-jntnsj/ltc-class",
-      })
-      Cal.ns["ltc-class"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
+    Cal("init", "ltc-class", { origin: "https://app.cal.com" })
+    Cal.ns["ltc-class"]("inline", {
+      elementOrSelector: "#my-cal-inline-ltc-class",
+      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+      calLink: "kris-jntnsj/ltc-class",
+    })
+    Cal.ns["ltc-class"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
 
-      Cal("init", "private-instruction", { origin: "https://app.cal.com" })
-      Cal.ns["private-instruction"]("inline", {
-        elementOrSelector: "#my-cal-inline-private-instruction",
-        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
-        calLink: "kris-jntnsj/private-instruction",
-      })
-    
-      Cal.ns["private-instruction"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
-      }, 0)
-    }
-    document.head.appendChild(script)
+    Cal("init", "private-instruction", { origin: "https://app.cal.com" })
+    Cal.ns["private-instruction"]("inline", {
+      elementOrSelector: "#my-cal-inline-private-instruction",
+      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+      calLink: "kris-jntnsj/private-instruction",
+    })
+    Cal.ns["private-instruction"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
+  }, 100)
 
-    return () => {
-      const s = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]')
-      if (s) s.remove()
-    }
-  }, [])
+  return () => clearInterval(interval)
+}, [])
 
   return (
     <div className={pageStyles.page}>
