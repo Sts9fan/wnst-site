@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { COURSES } from '../config.js'
 import styles from './BookPage.module.css'
 import pageStyles from './Page.module.css'
 
 export default function BookPage() {
-  const [selectedCourse, setSelectedCourse] = useState(COURSES[0])
+  const [selectedId, setSelectedId] = useState(COURSES[0].id)
+  const selectedCourse = COURSES.find(c => c.id === selectedId)
 
   return (
     <div className={pageStyles.page}>
@@ -20,8 +21,8 @@ export default function BookPage() {
           {COURSES.map(c => (
             <button
               key={c.id}
-              onClick={() => setSelectedCourse(c)}
-              className={`${styles.courseOption} ${selectedCourse.id === c.id ? styles.courseSelected : ''}`}
+              onClick={() => setSelectedId(c.id)}
+              className={`${styles.courseOption} ${selectedId === c.id ? styles.courseSelected : ''}`}
             >
               <div className={styles.courseOptionName}>{c.title}</div>
               <div className={styles.courseOptionPrice}>{c.priceLabel}</div>
@@ -29,14 +30,19 @@ export default function BookPage() {
           ))}
         </div>
 
-        <div className={styles.calWrap}>
-          <iframe
-            key={selectedCourse.calLink}
-            src={`https://cal.com/${selectedCourse.calLink}?embed=true`}
-            style={{ width: '100%', height: '700px', border: 'none' }}
-            title="Book a session"
-          />
-        </div>
+        {COURSES.map(c => (
+          <div
+            key={c.id}
+            className={styles.calWrap}
+            style={{ display: selectedId === c.id ? 'block' : 'none' }}
+          >
+            <iframe
+              src={`https://cal.com/${c.calLink}?embed=true`}
+              style={{ width: '100%', height: '700px', border: 'none' }}
+              title={c.title}
+            />
+          </div>
+        ))}
       </div>
     </div>
   )
