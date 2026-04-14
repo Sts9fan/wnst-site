@@ -1,11 +1,42 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { COURSES } from '../config.js'
 import styles from './BookPage.module.css'
 import pageStyles from './Page.module.css'
 
+function loadCal() {
+  return new Promise((resolve) => {
+    if (window.Cal) { resolve(); return; }
+    const script = document.createElement('script')
+    script.src = 'https://app.cal.com/embed/embed.js'
+    script.onload = resolve
+    document.head.appendChild(script)
+  })
+}
+
 export default function BookPage() {
   const [selectedId, setSelectedId] = useState(COURSES[0].id)
-  const selectedCourse = COURSES.find(c => c.id === selectedId)
+
+  useEffect(() => {
+    loadCal().then(() => {
+      // Init LTC class
+      Cal("init", "ltc-class", { origin: "https://app.cal.com" })
+      Cal.ns["ltc-class"]("inline", {
+        elementOrSelector: "#my-cal-inline-ltc-class",
+        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+        calLink: "kris-jntnsj/ltc-class",
+      })
+      Cal.ns["ltc-class"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
+
+      // Init private instruction
+      Cal("init", "private-instruction", { origin: "https://app.cal.com" })
+      Cal.ns["private-instruction"]("inline", {
+        elementOrSelector: "#my-cal-inline-private-instruction",
+        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+        calLink: "kris-jntnsj/private-instruction",
+      })
+      Cal.ns["private-instruction"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
+    })
+  }, [])
 
   return (
     <div className={pageStyles.page}>
@@ -30,19 +61,19 @@ export default function BookPage() {
           ))}
         </div>
 
-        {COURSES.map(c => (
+        <div style={{ display: selectedId === 'ltc-fid' ? 'block' : 'none' }}>
           <div
-            key={c.id}
+            id="my-cal-inline-ltc-class"
             className={styles.calWrap}
-            style={{ display: selectedId === c.id ? 'block' : 'none' }}
-          >
-            <iframe
-              src={`https://cal.com/${c.calLink}?embed=true&cache=${c.id}`}
-              style={{ width: '100%', height: '700px', border: 'none' }}
-              title={c.title}
-            />
-          </div>
-        ))}
+          />
+        </div>
+
+        <div style={{ display: selectedId === 'private' ? 'block' : 'none' }}>
+          <div
+            id="my-cal-inline-private-instruction"
+            className={styles.calWrap}
+          />
+        </div>
       </div>
     </div>
   )
