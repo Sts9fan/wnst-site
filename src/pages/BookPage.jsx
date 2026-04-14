@@ -11,8 +11,9 @@ export default function BookPage() {
     script.src = 'https://app.cal.com/embed/embed.js'
     script.async = true
     script.onload = () => {
-      const Cal = window.Cal
-      if (!Cal) return
+      setTimeout(() => {
+        const Cal = window.Cal
+        if (!Cal) return
 
       Cal("init", "ltc-class", { origin: "https://app.cal.com" })
       Cal.ns["ltc-class"]("inline", {
@@ -28,7 +29,9 @@ export default function BookPage() {
         config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
         calLink: "kris-jntnsj/private-instruction",
       })
+    
       Cal.ns["private-instruction"]("ui", { hideEventTypeDetails: false, layout: "month_view" })
+      }, 0)
     }
     document.head.appendChild(script)
 
