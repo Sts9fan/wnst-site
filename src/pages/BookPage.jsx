@@ -58,7 +58,12 @@ export default function BookPage() {
     `
     document.body.appendChild(script)
 
-    return () => {
-      const s = document.getElementById('cal-script')
-      if (s) s.remove()
+        return () => {
+          const s = document.getElementById('cal-script')
+          if (s) s.remove()
+        }
+      }, [selectedCourse])
+    
+      return <div id="cal-embed" />
+    
     }
